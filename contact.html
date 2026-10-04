@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- reset CSS -->
+    <link rel="stylesheet" href="reset.css">
+    <!-- Google icon -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Chiron+GoRound+TC:wght@200..900&family=Noto+Sans+TC:wght@100..900&display=swap"
+        rel="stylesheet">
+    <!-- style CSS -->
+    <link rel="stylesheet" href="contact.css">
+    <!-- favicon -->
+    <link rel="icon" type="image/png" href="assets/spider-circle.png">
+    <title>若失公寓 | 聯絡我們</title>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="index.html"><img class="logo-spider" src="assets/spider-white.png" alt="logo-spider"></a>
+            <a href="index.html"><img class="logo-standard-word" src="assets/standard-word.png"
+                    alt="logo-standard-word"></a>
+        </div>
+        <nav>
+            <div class="navbar">
+                <a class="nav-button home" href="index.html">首頁</a>
+                <a class="nav-button about-lost" href="index.html#about-lost">關於迷惘</a>
+                <a class="nav-button reservation" href="index.html#reservation-section">入住資訊</a>
+                <a class="nav-button donate" href="">我要募資</a>
+                <a class="nav-button about-us" href="about-us.html">關於我們</a>
+                <a class="nav-button faq" href="faq.html">常見問題</a>
+                <a class="nav-button contact" href="contact.html">聯絡我們</a>
+            </div>
+            <a class="ig" href="https://www.instagram.com/lost.apt?stkn=cDd1OHBlZGJwaGpr" target="_blank"><img src="assets/ig.svg" alt="instagram"></a>
+            <div class="mob-wrapper">
+                <button class="hamburger-btn" type="button" aria-label="開啟選單" aria-expanded="false">
+                    <img class="icon-open" src="assets/hamburger.svg" alt="">
+                    <img class="icon-close" src="assets/cross.svg" alt="">
+                </button>
+                <nav class="mob-nav">
+                    <div class="mob-nav-button">
+                        <a href="index.html">首頁</a>
+                    </div>
+                    <div class="mob-nav-button">
+                        <a href="index.html#about-lost">關於迷惘</a>
+                    </div>
+                    <div class="mob-nav-button">
+                        <a href="index.html#reservation-section">入住資訊</a>
+                    </div>
+                    <div class="mob-nav-button">
+                        <a href="">我要募資</a>
+                    </div>
+                    <div class="mob-nav-button">
+                        <a href="about-us.html">關於我們</a>
+                    </div>
+                    <div class="mob-nav-button">
+                        <a href="faq.html">常見問題</a>
+                    </div>
+                    <div class="mob-nav-button">
+                        <a href="contact.html">聯絡我們</a>
+                    </div>
+                </nav>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <h1>聯絡我們</h1>
+        <form class="contact-form" id="contact-form">
+            <div class="form-row">
+                <label for="name">姓名</label>
+                <input class="fill-name" type="text" name="name" placeholder="姓名" required>
+                <label for="phone">電話</label>
+                <input class="fill-phone" type="tel" name="phone" placeholder="電話">
+            </div>
+            <label for="email">電子信箱</label>
+            <input class="fill-email" type="email" name="email" placeholder="電子信箱" required>
+            <label for="message">想告訴我們的話</label>
+            <textarea class="fill-message" name="message" placeholder="歡迎留下您的想法⋯⋯" rows="8"></textarea>
+            <div class="form-buttons">
+                <button type="reset" class="btn btn-clear">清除</button>
+                <button type="submit" class="btn btn-submit">送出</button>
+            </div>
+        </form>
+
+        <!-- hidden 屬性是瀏覽器內建的，等於 display: none，不用另外寫 CSS -->
+        <div class="form-success" hidden>
+            <p>訊息已送出，我們會盡快回覆您！</p>
+        </div>
+</div>
+    </main>
+
+    <footer>
+        <p>國立陽明交通大學傳播與科技學系 116 級 若失公寓製作團隊</p>
+        <p class="mail-footer">聯絡信箱 | lost.apt116@gmail.com<span class="material-symbols-outlined mail">mail</span></p>
+        <p class="social-media-footer">社群媒體 | @lost.apt<span class="ig-footer"><img src="assets/ig.svg" alt="instagram"></span></p>
+        <div class="contact-info">
+            <p class="mob-mail-footer">聯絡信箱 | lost.apt116@gmail.com<span class="material-symbols-outlined mail">mail</span></p>
+            <p class="mob-social-media-footer">社群媒體 | @lost.apt<span class="ig-footer"><img src="assets/ig.svg" alt="instagram"></span></p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        emailjs.init({ publicKey: "oGaUKlWmEvGJ8ITHL" });
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

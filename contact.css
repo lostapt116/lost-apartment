@@ -1,0 +1,659 @@
+:root {
+    /* 電腦版的單位：以 1440px 的設計稿為準，螢幕超過 1440px 就不再放大 */
+    --d: calc(min(100vw, 1440px) / 1440);
+}
+
+/* 全域重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    height: auto;
+    background: url(assets/background.PNG) 100% 1000px repeat;
+    font-family: "Chiron GoRound TC";
+}
+
+/* nav */
+header {
+    background-image: url(assets/background.PNG) 0 0 / 100% 1000px repeat;
+    width: 100%;
+    height: calc(130 * var(--d));
+    padding: calc(15 * var(--d)) calc(50 * var(--d));
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    margin-top:auto;
+    margin-bottom:auto;
+}
+
+.logo-spider {
+    height: calc(69 * var(--d));
+    width: auto;                          /* 寬度照圖片比例自動算，不會變形 */
+    margin-right: calc(16 * var(--d));
+}
+
+.logo-standard-word {
+    height: calc(69 * var(--d));
+    width: auto;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    margin-right: calc(30 * var(--d));
+    align-items: center;
+}
+
+.navbar {
+    background-color: white;
+    margin: auto;
+    padding: calc(14 * var(--d)) 1px;
+    border-radius: calc(30 * var(--d));
+    font-size: calc(16 * var(--d));       /* 原本 1rem = 16px */
+    margin-right: calc(40 * var(--d));
+}
+
+.nav-button {
+    text-decoration: none;
+    color: #1E1E24;
+    font-weight: 600;
+}
+
+/* IG 圖示：原本沒有設定大小，用的是圖檔本身的 40px */
+.ig > img {
+    display: block;
+    width: calc(40 * var(--d));
+    height: calc(40 * var(--d));
+}
+
+.mob-wrapper {
+    display: none;
+}
+
+/* 頁面按鈕 */
+.home {
+    background-color: white;
+    color: #1E1E24;
+    padding: calc(11 * var(--d)) calc(30 * var(--d));
+    border-radius: calc(50 * var(--d));
+}
+
+.about-lost {
+    background-color: white;
+    color: #1E1E24;
+    padding: calc(11 * var(--d)) calc(15 * var(--d));
+    border-radius: calc(50 * var(--d));
+}
+
+.reservation {
+    background-color: white;
+    color: #1E1E24;
+    padding: calc(11 * var(--d)) calc(15 * var(--d));
+    border-radius: calc(50 * var(--d));
+}
+
+.donate {
+    background-color: white;
+    color: #1E1E24;
+    padding: calc(11 * var(--d)) calc(15 * var(--d));
+    border-radius: calc(50 * var(--d));
+}
+
+.about-us {
+    background-color: white;
+    color: #1E1E24;
+    padding: calc(11 * var(--d)) calc(15 * var(--d));
+    border-radius: calc(50 * var(--d));
+}
+
+.faq {
+    background-color: white;
+    color: #1E1E24;
+    padding: calc(11 * var(--d)) calc(15 * var(--d));
+    border-radius: calc(50 * var(--d));
+}
+
+/* 啟動 */
+.contact {
+    background-color: #1E1E24;
+    color: white;
+    padding: calc(11 * var(--d)) calc(15 * var(--d));
+    border-radius: calc(50 * var(--d));
+}
+
+/* 頁面內容 */
+main {
+    height: auto;
+    margin-top: 200px;
+    margin-bottom: 100px;
+    color: white;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.contact-form {
+    width: 60%;
+    margin: auto;
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: normal;
+    position: relative;
+}
+
+.contact-form::before {
+    content: '';
+    position: absolute;
+    background-image: url(assets/form-left.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 300px;
+    aspect-ratio: 669 / 651;
+    top: 20px;
+    left: -310px;
+    pointer-events: none;
+}
+
+.contact-form::after {
+    content: '';
+    position: absolute;
+    background-image: url(assets/form-right.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 300px;
+    aspect-ratio: 756 / 433;
+    bottom: 175px;
+    right: -310px;
+    pointer-events: none;
+}
+
+.form-row {
+    display: flex;
+    justify-content: row;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.fill-name, .fill-phone {
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.fill-email {
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: normal;
+    margin-bottom: 20px;
+}
+
+.fill-message {
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: normal;
+    margin-bottom: 30px;
+}
+
+.contact-form .form-row input, .contact-form input,
+.contact-form textarea {
+    font-family: "Chiron GoRound TC";
+    width: 100%;
+    border: 0;
+    border-radius: 20px;
+    padding: 16px 20px;
+    background-color: white;
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    gap: 100px;
+}
+
+.btn {
+    border: 0; 
+    font-family: "Chiron GoRound TC";
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: white;
+    padding: 10px 30px;
+    border-radius: 30px;
+}
+
+.btn-clear { 
+    background: rgba(200, 70, 88, 0.50);
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25) inset;
+}
+
+.btn-submit { 
+    background: rgba(88, 157, 116, 0.50);
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25) inset; 
+}
+
+.btn:hover {
+    color: #1E1E24;
+    background-color: white;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25) inset;
+}
+
+.form-success {
+    width: 80%;
+    height: 300px;
+    max-width: 700px;
+    color: white;
+    background-color: #455E50;
+    border-radius: 20px;
+    padding: 40px 24px;
+    font-size: 1.25rem;
+    margin: 0 auto; 
+    text-align: center; 
+    margin-bottom: 50px;
+}
+
+.form-success p {
+    align-items: center;
+}
+
+label {
+    display: none;
+}
+
+/* footer */
+footer {
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 10px;
+    margin: 20px;
+}
+
+footer > p {
+    align-items: center;
+}
+
+.social-media-footer {
+    align-items: center;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.mail {
+    align-items: center;
+    margin: auto;
+}
+
+.ig-footer > img {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.mail-footer, .social-media-footer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.contact-info {
+    display: none;
+}
+
+/* 螢幕 1250px 以下：選單列收起來，改用漢堡選單（手機版也會套用到這段） */
+@media screen and (max-width: 1250px) {
+    .navbar {
+        display: none;
+    }
+
+    header {
+        background-image: none;
+        background-color:#1E1E24;
+    }
+
+    .mob-wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .mob-nav {
+        display: flex;
+        position: absolute;
+        flex-direction: column;
+        top: 100%;
+        right: 0;
+        left: 0;
+        padding: 10px 15px;
+        height: auto;
+        align-items: stretch;
+        background-color: #1E1E24;
+        border-radius: 0 0 15px 15px;
+        box-shadow: 0 4px 5px 2px rgba(255, 255, 255, 0.10);
+        margin-right: 0;  
+
+        opacity: 0;
+        transform: translateY(-10px);
+        visibility: hidden;
+        transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+    }
+
+    .mob-nav-button {
+        padding: 10px 15px;
+    }
+
+    .mob-nav-button > a {
+        text-decoration: none;
+        font-weight: 300;
+        color: white;
+    }
+
+    .mob-wrapper.open .mob-nav {
+        opacity: 1;
+        transform: translateY(0);
+        visibility: visible;
+    }
+
+    .hamburger-btn {
+        display: flex;
+        background: none;
+        border: 0;
+        padding: 0;
+        cursor: pointer;
+    }
+
+    .icon-close {
+        display: none;
+    }
+
+    .mob-wrapper.open .icon-open {
+        display: none;
+    }
+
+    .mob-wrapper.open .icon-close {
+        display: block;
+    }
+
+    /* 新增：IG 和漢堡圖示在這個範圍用固定大小，才夠大、好點 */
+    .ig > img,
+    .hamburger-btn img {
+        width: 30px;
+        height: 30px;
+    }
+
+    /* 新增：IG 和漢堡圖示之間的距離 */
+    .ig {
+        margin-right: 24px;
+    }
+}
+
+/* 螢幕 769px ~ 1250px：footer 改成上下兩行（第一行製作團隊，第二行信箱和社群），手機版不受影響 */
+@media screen and (min-width: 769px) and (max-width: 1250px) {
+    footer {
+        flex-direction: column;   /* 由左右並排改成上下排列 */
+        text-align: center;
+        gap: 8px;                 /* 兩行之間的距離 */
+    }
+
+    footer > p {
+        font-size: 0.875rem;
+    }
+
+    /* 電腦版的信箱、社群先藏起來，改用下面包在同一行的那一組 */
+    .mail-footer, .social-media-footer {
+        display: none;
+    }
+
+    .contact-info {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 24px;                /* 信箱和社群之間的距離 */
+    }
+
+    .contact-info > p {
+        font-size: 0.875rem;
+    }
+
+    .mob-mail-footer, .mob-social-media-footer {
+        display: flex;
+        align-items: center;
+        gap: 8px;                 /* 文字和圖示之間的距離 */
+    }
+
+    .contact-info .mail {
+        font-size: 1.25rem;       /* 信封圖示的大小 */
+        margin: 0;
+    }
+
+    .ig-footer > img {
+        display: block;
+        width: 1.25rem;
+        height: 1.25rem;
+    }
+}
+
+/* 手機版：768px 以下 */
+@media screen and (max-width: 768px) {
+    :root {
+        /* 螢幕超過 560px 之後就不再放大，以 560px 的大小為準 */
+        --u: calc(min(100vw, 560px) / 430);
+        --d: 1px;   /* 手機版把電腦版的單位固定成 1px，電腦版的數字就會維持原本的大小 */
+    }
+
+    /* nav */
+    header {
+        height: 136px;
+        background-image: none;
+        background-color:#1E1E24;
+        padding-top: 65px;
+        padding-right: 24px;
+        padding-left: 24px;
+        align-items: center;
+        z-index: 100;
+    }
+
+    .logo-spider {
+        width: 41px;
+        height: 39px;
+        margin-right: 5px;
+        margin-bottom: 3px;
+    }
+
+    .logo-standard-word {
+        width: 107px;
+        height: 45px;
+        aspect-ratio: 107/45;
+    }
+
+    nav {
+        margin-right: 0px;
+    }
+
+    .ig > img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .ig {
+        margin-right: 24px;
+    }
+
+    .navbar {
+        display: none;
+    }
+
+    .mob-wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .mob-nav {
+        display: flex;
+        position: absolute;
+        background-color: #363f59d1;
+        flex-direction: column;
+        top: 100%;
+        right: 0;
+        left: 0;
+        padding: 10px 15px;
+        height: auto;
+        align-items: stretch;
+        background-color: #1E1E24;
+        border-radius: 0 0 15px 15px;
+        box-shadow: 0 4px 5px 2px rgba(255, 255, 255, 0.10);
+
+        opacity: 0;
+        transform: translateY(-10px);
+        visibility: hidden;
+        transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+    }
+
+    .mob-nav-button {
+        padding: 10px 15px;
+    }
+
+    .mob-nav-button > a {
+        text-decoration: none;
+        font-weight: 300;
+        color: white;
+    }
+
+    .mob-wrapper.open .mob-nav {
+        opacity: 1;
+        transform: translateY(0);
+        visibility: visible;
+    }
+
+    .hamburger-btn {
+        display: flex;
+        background: none;
+        border: 0;
+        padding: 0;
+        cursor: pointer;
+    }
+
+    .icon-close {
+        display: none;
+    }
+
+    .mob-wrapper.open .icon-open {
+        display: none;
+    }
+
+    .mob-wrapper.open .icon-close {
+        display: block;
+    }
+
+    /* 頁面內容 */
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    main {
+        padding: 0 20px;
+        flex: 1;
+    }
+
+    .contact-form {
+        width: 80%;
+    }
+
+    label {
+        display: flex;
+        font-size: 0.875rem;
+        padding-left: 10px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+        margin-bottom: 0;
+    }
+
+    .fill-email {
+        margin-bottom: 0;
+    }
+
+    .fill-name, .fill-phone, .fill-email, .fill-message {
+        font-size: 1rem;
+    }
+
+    .form-buttons {
+        gap: 50px;
+    }
+
+    .btn {
+        font-size: 1rem;
+    }
+
+    .contact-form::after, .contact-form::before {
+        display: none;
+    }
+
+    /* footer */
+    footer {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        line-height: 2;
+    }
+
+    footer > p {
+        font-size: 0.625rem;
+    }
+
+    .mail-footer, .social-media-footer {
+        display: none;
+    }
+
+    .contact-info {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .contact-info > p {
+        color: white;
+        font-size: 0.625rem;
+        align-items: center;
+        gap: 5px;
+        justify-content: space-between;
+    }
+
+    .mob-mail-footer, .mob-social-media-footer {
+        display: flex;
+        align-items: center;
+    }
+
+    .mob-mail-footer {
+        margin-right: 20px;
+    }
+
+    .mail {
+        font-size: 0.625rem;
+    }
+
+    .ig-footer > img {
+        width: 0.625rem;
+        height: 0.625rem;
+    }
+}
