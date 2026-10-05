@@ -1455,10 +1455,16 @@ footer > p {
         word-break: break-word;
     }
 
-    .quote {
+    .quote-up {
         font-size: 0.875rem;
         margin-top: 30px;
-        text-align: center;
+        line-height: 2;
+    }
+
+    .quote-down {
+        font-size: 0.875rem;
+        margin-top: 5px;
+        line-height: 2;
     }
 
     /* 預約入住表單 */
