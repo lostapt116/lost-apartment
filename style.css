@@ -594,7 +594,7 @@ html {
 
 /* 預約入住表單 */
 .reservation-section {
-    padding-top: 150px;
+    padding-top: 50px;
 }
 
 .reservation-card {
@@ -879,6 +879,11 @@ footer {
 
 footer > p {
     align-items: center;
+}
+
+footer a {
+    text-decoration: none;
+    color: white;
 }
 
 .social-media-footer {
@@ -1567,6 +1572,11 @@ footer > p {
         font-size: 0.625rem;
     }
 
+    footer a {
+        text-decoration: none;
+        font-size: 0.625rem;
+    }
+
     .mail-footer, .social-media-footer {
         display: none;
     }
@@ -1579,7 +1589,7 @@ footer > p {
         text-align: center;
     }
 
-    .contact-info > p {
+    .contact-info > a {
         color: white;
         font-size: 0.625rem;
         align-items: center;

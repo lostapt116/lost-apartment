@@ -289,6 +289,11 @@ footer > p {
     align-items: center;
 }
 
+footer a {
+    text-decoration: none;
+    color: white;
+}
+
 .social-media-footer {
     align-items: center;
     margin-top: auto;
@@ -620,6 +625,11 @@ footer > p {
         font-size: 0.625rem;
     }
 
+    footer a {
+        text-decoration: none;
+        font-size: 0.625rem;
+    }
+
     .mail-footer, .social-media-footer {
         display: none;
     }
@@ -632,7 +642,7 @@ footer > p {
         text-align: center;
     }
 
-    .contact-info > p {
+    .contact-info > a {
         color: white;
         font-size: 0.625rem;
         align-items: center;
