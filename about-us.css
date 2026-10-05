@@ -40,6 +40,7 @@ header {
     height: calc(69 * var(--d));
     width: auto;                          /* 寬度照圖片比例自動算，不會變形 */
     margin-right: calc(16 * var(--d));
+    rotate: -10deg;
 }
 
 .logo-standard-word {
