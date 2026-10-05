@@ -19,7 +19,7 @@ body {
 
 /* nav */
 header {
-    background: url(assets/background.PNG) 0 0 / 100% 1000px repeat;
+    background-color: #1E1E24;
     width: 100%;
     height: calc(130 * var(--d));
     padding: calc(15 * var(--d)) calc(50 * var(--d));

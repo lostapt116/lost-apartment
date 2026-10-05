@@ -19,7 +19,7 @@ body {
 
 /* nav */
 header {
-    background: url(assets/background.PNG) 0 0 / 100% 1000px repeat;
+    background-color: #1E1E24;
     width: 100%;
     height: calc(130 * var(--d));
     padding: calc(15 * var(--d)) calc(50 * var(--d));
@@ -605,6 +605,41 @@ html {
     padding: 48px 56px;
     margin-bottom: 200px;
 }
+
+/* ===== 報名尚未開放的遮罩 =====
+   開放報名時這裡不用刪，只要改 index.html 標示的兩個地方就好；
+   沒有遮罩的時候，下面這些樣式不會有任何作用。 */
+.reservation-card.locked {
+    position: relative;      /* 讓遮罩以這張卡片為範圍 */
+    overflow: hidden;        /* 遮罩的四個角跟著卡片的圓角裁切 */
+}
+
+/* 蓋在表單上的遮罩 */
+.form-lock {
+    position: absolute;
+    inset: 0;                                  /* 上下左右都貼齊卡片，蓋滿整張 */
+    z-index: 5;                                /* 疊在表單上面 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;                       /* 鎖頭和文字水平置中 */
+    padding-top: 160px;                        /* 鎖頭離卡片頂端的距離 */
+    gap: 12px;
+    background-color: rgba(30, 30, 36, 0.6);   /* 半透明的深色，跟網站背景同色系 */
+    backdrop-filter: blur(6px);                /* 把遮罩後面的表單變模糊 */
+    -webkit-backdrop-filter: blur(6px);        /* Safari 需要這一行 */
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.form-lock img {
+    width: 72px;
+    height: 72px;
+    margin-bottom: 12px;
+    color: white;
+}
+/* ===== 遮罩樣式結束 ===== */
 
 .reservation-form h1 {
     font-size: 1.5rem;
@@ -1482,6 +1517,17 @@ footer a {
         margin-left: -24px;
         margin-right: -24px;
         margin-bottom: 100px;
+    }
+
+    /* 報名尚未開放的遮罩（手機版）：字和鎖頭縮小一點 */
+    .form-lock {
+        padding-top: 100px;
+        font-size: 1.125rem;
+    }
+
+    .form-lock img {
+        width: 56px;
+        height: 56px;
     }
 
     .reservation-form h1 {

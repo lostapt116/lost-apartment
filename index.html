@@ -231,8 +231,18 @@
         </div>
 
         <div class="reservation-section" id="reservation-section">
-            <div class="reservation-card" id="reservation">
-                <form class="reservation-form" id="reservation-form">
+            <div class="reservation-card locked" id="reservation">
+
+                <!-- ▼▼▼【開放報名時 1/2】把這一整段遮罩刪掉或註解掉（從這裡開始）▼▼▼ -->
+                <div class="form-lock">
+                    <img src="assets/lock.svg" alt="">
+                    <p>若失公寓將於 10/19 - 11/1 開放報名</p>
+                    <p>敬請期待！</p>
+                </div>
+                <!-- ▲▲▲【開放報名時 1/2】刪到這裡為止 ▲▲▲ -->
+
+                <!-- ▼▼▼【開放報名時 2/2】把下一行最後面的 inert 刪掉（inert 會讓整個表單不能點、不能輸入）▼▼▼ -->
+                <form class="reservation-form" id="reservation-form" inert>
                     <h1>預約入住資訊填寫</h1>
         
                     <div class="form-field">
