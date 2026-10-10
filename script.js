@@ -177,7 +177,7 @@ if (reservationForm) {
         };
 
         try {
-            await emailjs.send("service_xwh4igq", "template_631ahfm", templateParams);
+            await emailjs.send("service_5mhhtag", "template_xhj851j", templateParams);
 
             reservationForm.hidden = true;
             document.querySelector(".form-success").hidden = false;
@@ -238,7 +238,7 @@ if (contactForm) {
         };
 
         try {
-            await emailjs.send("service_xwh4igq", "template_7d2tai1", templateParams);
+            await emailjs.send("service_5mhhtag", "template_922yhka", templateParams);
 
             contactForm.hidden = true;
             document.querySelector(".form-success").hidden = false;
