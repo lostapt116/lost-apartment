@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>開門動畫示範</title>
+    <style>
+        /* ===== 這一段只是示範頁面的外觀，搬到正式頁面時不需要 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background-color: #1E1E24;
+            color: white;
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            padding: 24px;
+        }
+
+        .hint {
+            font-size: 0.875rem;
+            opacity: 0.7;
+        }
+
+        /* ===== 開門動畫：從這裡開始是要搬到正式頁面的部分 ===== */
+
+        /* 場景的外框：三張圖都疊在這個框裡，框的比例跟原圖一樣（1440 × 1024） */
+        .door-scene {
+            position: relative;
+            width: min(100%, 900px);     /* 場景的寬度，可以自己調整 */
+            aspect-ratio: 1440 / 1024;
+            cursor: pointer;
+        }
+
+        /* 三張圖完全重疊 */
+        .door-scene img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        /* 半開、全開這兩層一開始是透明的，只看得到最底下關著的門 */
+        .door-half,
+        .door-full {
+            opacity: 0;
+        }
+
+        /* 開門：半開先淡入，接著全開淡入蓋上去，最後把半開那層收掉 */
+        .door-scene.open .door-half {
+            animation: door-half-in 0.9s ease-in-out forwards;
+        }
+
+        .door-scene.open .door-full {
+            animation: door-full-in 0.9s ease-in-out forwards;
+        }
+
+        /* 關門：順序反過來，全開先淡出、露出半開，半開再淡出
+           （要用另外命名的動畫，瀏覽器才會把它當成新的動畫重新播放） */
+        .door-scene.closed .door-half {
+            animation: door-half-out 0.9s ease-in-out forwards;
+        }
+
+        .door-scene.closed .door-full {
+            animation: door-full-out 0.9s ease-in-out forwards;
+        }
+
+        /* 半開那一層：前 35% 的時間淡入，停留一下，最後淡出 */
+        @keyframes door-half-in {
+            0% {
+                opacity: 0;
+            }
+
+            35% {
+                opacity: 1;
+            }
+
+            80% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        /* 全開那一層：等半開出現之後才開始淡入，然後一直留著 */
+        @keyframes door-full-in {
+            0% {
+                opacity: 0;
+            }
+
+            35% {
+                opacity: 0;
+            }
+
+            80% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* 關門時的半開那一層：先淡入墊在全開的下面，等全開淡出後自己再淡出 */
+        @keyframes door-half-out {
+            0% {
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 1;
+            }
+
+            65% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        /* 關門時的全開那一層：從完全顯示慢慢淡出 */
+        @keyframes door-full-out {
+            0% {
+                opacity: 1;
+            }
+
+            20% {
+                opacity: 1;
+            }
+
+            65% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        /* 使用者在系統設定裡選了「減少動態效果」時，不播過場，直接切換 */
+        @media (prefers-reduced-motion: reduce) {
+
+            .door-scene.open .door-half,
+            .door-scene.open .door-full,
+            .door-scene.closed .door-half,
+            .door-scene.closed .door-full {
+                animation-duration: 0.01s;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 開門動畫的 HTML：三張圖疊在一起，由下到上是 關門 → 半開 → 全開 -->
+    <div class="door-scene" id="door-scene">
+        <img class="door-closed" src="assets/door-open-1.webp" alt="若失公寓的門，門上寫著歡迎迷惘的你進入">
+        <img class="door-half" src="assets/door-open-2.webp" alt="">
+        <img class="door-full" src="assets/door-open-3.webp" alt="">
+    </div>
+
+    <p class="hint">點一下場景可以開門，再點一下關門</p>
+
+    <script>
+        // 點擊場景：開著就關、關著就開
+        const doorScene = document.getElementById("door-scene");
+
+        doorScene.addEventListener("click", () => {
+            const isOpen = doorScene.classList.contains("open");
+            doorScene.classList.toggle("open", !isOpen);   // 加上 open 會播開門動畫
+            doorScene.classList.toggle("closed", isOpen);  // 加上 closed 會播關門動畫
+        });
+    </script>
+</body>
+
+</html>
