@@ -699,12 +699,12 @@ footer a {
     }
 
     .why-section p {
-        font-size: 1rem;
+        font-size: calc(16 * var(--u));      /* 跟上面的小標用同一種寫法，兩者才會一起縮放、大小一致 */
         font-weight: 400;
         margin-left: 20px;
         margin-right: 20px;
         text-align: left;
-        line-height: 30px;
+        line-height: calc(30 * var(--u));
     }
 
     .phone-people {

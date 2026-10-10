@@ -181,8 +181,16 @@ h1 {
     font-weight: 600;
     line-height: normal;
     letter-spacing: 1.2px;
+    text-align: left;            /* 按鈕裡的文字預設會置中，問題換行時每一行都會跑到中間，這裡改成靠左 */
     padding: 20px 30px;
 }
+
+/* 問題的文字：佔滿加號以外的寬度，靠左對齊 */
+.faq-question .question {
+    flex: 1;
+    text-align: left;
+}
+
 
 .faq-icon {
     display: inline-flex; 

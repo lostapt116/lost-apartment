@@ -42,6 +42,42 @@ if (document.querySelector(".definition-item")) {
     }
 }
 
+// 開門動畫：門開到哪裡跟著捲動位置走，往下捲慢慢打開，往上捲關回去
+const doorScene = document.querySelector(".door-scene");
+if (doorScene) {
+    const doorAnim = doorScene.querySelector(".door-anim");
+    const DOOR_FRAMES = 25; // 總共 25 格畫面
+    const DOOR_COLS = 5;    // 大圖上一排 5 格
+    const DOOR_ROWS = 5;    // 總共 5 排
+    let currentFrame = -1;  // 目前顯示的是第幾格，一樣的話就不用重設
+
+    function updateDoor() {
+        const rect = doorScene.getBoundingClientRect();
+        const center = rect.top + rect.height / 2; // 場景中心點離螢幕上緣多遠
+
+        // 場景中心在螢幕 80% 高度時開始開門，捲到 40% 高度時完全打開
+        const startLine = window.innerHeight * 0.8;
+        const endLine = window.innerHeight * 0.4;
+
+        // 換算成 0（關著）到 1（全開）之間的進度，超出範圍就固定在 0 或 1
+        let progress = (startLine - center) / (startLine - endLine);
+        progress = Math.min(1, Math.max(0, progress));
+
+        const frame = Math.round(progress * (DOOR_FRAMES - 1));
+        if (frame === currentFrame) return;
+        currentFrame = frame;
+
+        // 把「第幾格」換算成它在 5 × 5 大圖上的位置
+        const x = (frame % DOOR_COLS) / (DOOR_COLS - 1) * 100;
+        const y = Math.floor(frame / DOOR_COLS) / (DOOR_ROWS - 1) * 100;
+        doorAnim.style.backgroundPosition = `${x}% ${y}%`;
+    }
+
+    window.addEventListener("scroll", updateDoor, { passive: true }); // 每次捲動都更新
+    window.addEventListener("resize", updateDoor);                    // 視窗大小改變時也更新
+    updateDoor();                                                     // 頁面載入時先算一次
+}
+
 // 首頁導覽列：捲到哪個段落，對應的按鈕就變色
 const aboutLostSection = document.getElementById("about-lost");
 const reservationSection = document.getElementById("reservation-section");

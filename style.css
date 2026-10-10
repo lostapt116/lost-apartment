@@ -366,6 +366,43 @@ html {
     letter-spacing: 1.2px;
 }
 
+/* ===== 開門動畫 ===== */
+/* 場景的外框，比例跟原圖一樣（1440 × 1024） */
+.door-scene {
+    position: relative;
+    width: min(100%, 900px);     /* 場景的寬度，最寬 900px */
+    aspect-ratio: 1440 / 1024;
+    margin: 0 auto 300px;        /* 水平置中，下方跟「若失公寓」介紹留 300px */
+}
+
+/* 底圖：完整的場景（磚牆、蜘蛛網、招牌、關著的門），不會動 */
+.door-scene-base {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* 會動的只有門洞這一塊，用百分比定位，場景放大縮小時位置都會對準。
+   數字的來源：這一塊在原圖上是 x 432~972、y 368~1024，除以原圖的寬 1440、高 1024 */
+.door-anim {
+    position: absolute;
+    left: 30%;                   /* 432 ÷ 1440 */
+    top: 35.9375%;               /* 368 ÷ 1024 */
+    width: 37.5%;                /* 540 ÷ 1440 */
+    height: 64.0625%;            /* 656 ÷ 1024 */
+
+    /* 25 格畫面排成 5 × 5 的一張大圖，一次只露出其中一格；一開始是第一格（關著的門） */
+    background-image: url(assets/door-sprite.webp);
+    background-size: 500% 500%;
+    background-position: 0% 0%;
+    background-repeat: no-repeat;
+}
+
+/* 要顯示哪一格由 script.js 依捲動位置決定：往下捲門慢慢打開，往上捲門關回去 */
+/* ===== 開門動畫結束 ===== */
+
 .lost-intro {
     margin-bottom: 200px;
     margin: auto;
@@ -1353,6 +1390,11 @@ footer a {
         font-weight: 300;
         line-height: 30px; /* 187.5% */
         letter-spacing: 0.8px;
+    }
+
+    /* 開門動畫（手機版）：下方的距離縮小 */
+    .door-scene {
+        margin-bottom: 120px;
     }
 
     .lost-intro {
