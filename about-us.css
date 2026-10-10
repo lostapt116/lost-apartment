@@ -132,6 +132,13 @@ nav {
     border-radius: calc(50 * var(--d));
 }
 
+.quiz {
+    background-color: white;
+    color: #1E1E24;
+    padding: calc(11 * var(--d)) calc(15 * var(--d));
+    border-radius: calc(50 * var(--d));
+}
+
 /* 頁面內容 */
 main {
     height: auto;

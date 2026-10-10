@@ -139,6 +139,13 @@ nav {
     border-radius: calc(50 * var(--d));
 }
 
+.quiz {
+    background-color: white;
+    color: #1E1E24;
+    padding: calc(11 * var(--d)) calc(15 * var(--d));
+    border-radius: calc(50 * var(--d));
+}
+
 /* 頁面內容 */
 main {
     height: auto;
@@ -461,8 +468,13 @@ html {
     background-image: url(assets/file-3.png);
 }
 
-.r4 {
+/* 逸安和宇廷的顏色互換：逸安用綠色（file-4），宇廷用藍色（file-1） */
+.r1 {
     background-image: url(assets/file-4.png);
+}
+
+.r4 {
+    background-image: url(assets/file-1.png);
 }
 
 .r1::after {
@@ -472,7 +484,7 @@ html {
     left: 50%;
     width: 85%;                              /* 紙比資料夾窄一點（774 ÷ 905 ≈ 85%） */
     aspect-ratio: 774 / 161;                 /* 維持 paper-1 原本的長寬比 */
-    background-image: url(assets/paper-1.png);
+    background-image: url(assets/paper-4.png);
     background-size: contain;
     background-repeat: no-repeat;
     transform: translateX(-50%);             /* 搭配 left: 50%，讓紙水平置中 */
@@ -529,7 +541,7 @@ html {
     left: 50%;
     width: 85%;                              /* 紙比資料夾窄一點（774 ÷ 905 ≈ 85%） */
     aspect-ratio: 774 / 161;                 /* 維持 paper-1 原本的長寬比 */
-    background-image: url(assets/paper-4.png);
+    background-image: url(assets/paper-1.png);
     background-size: contain;
     background-repeat: no-repeat;
     transform: translateX(-50%);             /* 搭配 left: 50%，讓紙水平置中 */
@@ -549,6 +561,7 @@ html {
 }
 
 .name-and-pic {
+    flex: 0 0 120px;             /* 左欄固定 120px 寬，不會被圖片撐大而擠到右邊的文字 */
     text-align: center;
     font-family: "Chiron GoRound TC";
     font-size: 24px;
@@ -557,9 +570,19 @@ html {
     line-height: normal;
 }
 
+/* 四張物品圖的比例都不同，統一放進同樣大小的框裡，四張卡片看起來才會一致 */
 .name-and-pic img {
-    margin-bottom: 10px;
-    width: 70%;
+    display: block;
+    width: 88px;                 /* 原本 110 × 90，縮小 20% */
+    height: 72px;
+    object-fit: contain;         /* 圖片完整縮進框裡，比例不變、不會被裁切 */
+    margin: 0 auto 10px;         /* 水平置中，下方跟名字留 10px */
+}
+
+/* 右邊的文字欄使用剩下的全部寬度 */
+.interact {
+    flex: 1;
+    min-width: 0;
 }
 
 .interact h3 {
@@ -1421,10 +1444,10 @@ footer a {
         opacity: 1;
     }
 
-    .renter-tab[data-target="r1"].active { background-color: rgb(0, 134, 182); }
+    .renter-tab[data-target="r1"].active { background-color: rgb(88, 157, 116); }
     .renter-tab[data-target="r2"].active { background-color: rgb(200, 70, 88); }
     .renter-tab[data-target="r3"].active { background-color: rgb(255, 166, 52); }
-    .renter-tab[data-target="r4"].active { background-color: rgb(88, 157, 116); }
+    .renter-tab[data-target="r4"].active { background-color: rgb(0, 134, 182); }
 
     /* 租客卡片：手機版一次只顯示分頁籤選中的那一張 */
     .four-renter-up, .four-renter-down {
@@ -1452,8 +1475,13 @@ footer a {
         background-image: url(assets/phone-file-3.png);
     }
 
-    .renter-card.r4 {
+    /* 逸安和宇廷的顏色互換（手機版） */
+    .renter-card.r1 {
         background-image: url(assets/phone-file-4.png);
+    }
+
+    .renter-card.r4 {
+        background-image: url(assets/phone-file-1.png);
     }
 
     .renter-card.active {
@@ -1464,9 +1492,10 @@ footer a {
        不然卡片背景是用 aspect-ratio 撐出來的資料夾圖，內容被撐得比圖片高的話，
        多出來的部分不會有白底，字會看不清楚 */
     .renter {
-        gap: 12px;
+        gap: 40px;           /* 照片和互動亮點之間的距離 */
         align-items: center;
         margin-top: 20px;
+        margin-left: 20px;   /* 照片和互動亮點整組往右移，視覺上才不會偏左；下方的引言不受影響 */
     }
 
     .name-and-pic {
@@ -1477,6 +1506,10 @@ footer a {
     .name-and-pic img {
         width: 64px;
         height: auto;
+        /* 沿著圖案邊緣加一圈白色光暈，圖案在同色的卡片上才看得出輪廓；
+           同一個效果疊四次，光暈才會夠實、夠明顯 */
+        filter: drop-shadow(0 0 2.2px white) drop-shadow(0 0 2.2px white)
+                drop-shadow(0 0 2.2px white) drop-shadow(0 0 2.2px white);  /* 模糊範圍：1.5px → 1.8px → 2.2px，每次加大 20% */
     }
 
     .name-and-pic h3 {
