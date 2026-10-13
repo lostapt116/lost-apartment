@@ -10,12 +10,27 @@ hamburgerBtn.addEventListener("click", () => {
 
 // 首頁（這些效果只有 index.html 有對應的元素，一定要先檢查存在，不然在其他頁面會整段中斷）
 if (document.querySelector(".definition-item")) {
-    // 迷惘的定義
-    document.querySelectorAll(".definition-item").forEach((item) => {
-        item.addEventListener("mouseenter", () => {
-            item.classList.add("revealed");
+    // 迷惘的定義：跟著捲動顯現或收起（只在電腦版；手機版的定義本來就直接顯示）
+    const definitionItems = document.querySelectorAll(".definition-item");
+    const desktopOnly = window.matchMedia("(min-width: 769px)");
+
+    function updateDefinitions() {
+        definitionItems.forEach((item) => {
+            if (!desktopOnly.matches) {
+                item.classList.remove("revealed"); // 手機版不使用這個效果
+                return;
+            }
+            const rect = item.getBoundingClientRect();
+            const center = rect.top + rect.height / 2; // 這一組的中心點離螢幕上緣多遠
+
+            // 中心點捲到螢幕 65% 高度以上：顯現定義；往回捲、掉回這條線以下：收起來
+            item.classList.toggle("revealed", center < window.innerHeight * 0.65);
         });
-    });
+    }
+
+    window.addEventListener("scroll", updateDefinitions, { passive: true }); // 每次捲動都檢查
+    window.addEventListener("resize", updateDefinitions);                    // 視窗大小改變時也檢查
+    updateDefinitions();                                                     // 頁面載入時先檢查一次
 
     // 迷惘共同經歷
     const lostSame = document.querySelector(".lost-same");

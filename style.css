@@ -312,7 +312,7 @@ html {
     transition: opacity 1s ease-in-out; 
 }
 
-/* 滑鼠移到「這一整組」上面時，才讓裡面的文字淡入 */
+/* 捲到這一組時 script.js 會加上 revealed，裡面的文字才淡入；往回捲會拿掉，文字就收起來 */
 .definition-item.revealed .definition-hide {
     opacity: 1;
     transform: translateX(0);
@@ -1188,7 +1188,10 @@ footer a {
     :root {
         /* 螢幕超過 560px 之後就不再放大，以 560px 的大小為準 */
         --u: calc(min(100vw, 560px) / 430);
-        --d: 1px;   /* 新增：手機版把電腦版的單位固定成 1px，電腦版的數字就會維持原本的大小 */
+        --d: 1px;
+        /* 租客資訊專用的單位：螢幕 430px 以上固定是 1px（大小不變），比 430px 窄就等比例縮小。
+           算法是「卡片實際寬度 ÷ 430px 螢幕時的卡片寬度 382px」；48px 是 main 左右各 24px 的留白 */
+        --r: calc((min(100vw, 430px) - 48px) / 382);   /* 新增：手機版把電腦版的單位固定成 1px，電腦版的數字就會維持原本的大小 */
     }
     
     /* nav */
@@ -1505,38 +1508,40 @@ footer a {
         margin-bottom: 30px;
     }
 
-    /* 租客姓名分頁籤：手機版點姓名切換要顯示的那張卡片，顏色對應各自卡片的資料夾顏色 */
+    /* 租客姓名分頁籤：做成資料夾的標籤，底色是白的，只有最上面一條是各自的顏色 */
     .renter-tabs {
         display: flex;
         justify-content: center;
-        margin: 0 20px;
+        gap: 4px;                          /* 標籤之間留一點縫，看得出是四張不同的資料夾 */
+        margin: 0 calc(20 * var(--r)) -2px;   /* 最後的 -2px：讓標籤往下疊在卡片上 2px，中間才不會露出一條縫 */
         position: relative;
-        z-index: 1;
+        z-index: 1;                        /* 標籤疊在卡片上面 */
     }
 
     .renter-tab {
         flex: 1;
         border: 0;
-        padding: 10px 0;
-        background-color: #555;
-        color: white;
+        border-top: 7px solid #999;        /* 最上面的色條，顏色在下面依租客個別指定 */
+        padding: calc(8 * var(--r)) 0 calc(10 * var(--r));
+        background-color: #D9D9DE;         /* 沒選到的標籤用淺灰，看起來像疊在後面 */
+        color: #1E1E24;
         font-family: "Chiron GoRound TC";
-        font-size: 0.85rem;
+        font-size: calc(13.6 * var(--r));      /* 原本 0.85rem = 13.6px */
         font-weight: 600;
-        opacity: 0.6;
-        border-radius: 12px 12px 0 0;
+        border-radius: 10px 10px 0 0;
         cursor: pointer;
-                box-shadow: 3px 0 0 0 rgba(0, 0, 0, 0.25);
     }
 
+    /* 選到的標籤變成白色，跟下面的白色卡片連成一張 */
     .renter-tab.active {
-        opacity: 1;
+        background-color: white;
     }
 
-    .renter-tab[data-target="r1"].active { background-color: rgb(88, 157, 116); }
-    .renter-tab[data-target="r2"].active { background-color: rgb(200, 70, 88); }
-    .renter-tab[data-target="r3"].active { background-color: rgb(255, 166, 52); }
-    .renter-tab[data-target="r4"].active { background-color: rgb(0, 134, 182); }
+    /* 每位租客的色條（不管有沒有選到都會顯示） */
+    .renter-tab[data-target="r1"] { border-top-color: rgb(88, 157, 116); }
+    .renter-tab[data-target="r2"] { border-top-color: rgb(200, 70, 88); }
+    .renter-tab[data-target="r3"] { border-top-color: rgb(255, 166, 52); }
+    .renter-tab[data-target="r4"] { border-top-color: rgb(0, 134, 182); }
 
     /* 租客卡片：手機版一次只顯示分頁籤選中的那一張 */
     .four-renter-up, .four-renter-down {
@@ -1546,31 +1551,18 @@ footer a {
     .renter-card {
         display: none;
         width: 100%;
-        aspect-ratio: auto;   /* 新增：取消「高度跟著寬度等比例變化」 */
-        min-height: 263px;    /* 新增：高度固定在螢幕 430px 時的大小 */
-        padding-top: 24px;
-        padding-left: 16px;
+        aspect-ratio: auto;   /* 取消「高度跟著寬度等比例變化」 */
+        min-height: calc(263 * var(--r));    /* 螢幕 430px 時是 263px，小螢幕等比例縮小 */
+        padding-top: calc(24 * var(--r));
+        padding-left: calc(16 * var(--r));
+        padding-right: calc(16 * var(--r));     /* 右邊也留白，文字才不會貼到卡片邊緣 */
+        padding-bottom: calc(20 * var(--r));
         margin-bottom: 0;
-        background-image: url(assets/phone-file-1.png);
-        background-size: 100% 100%;
-        color: white;
-    }
-
-    .renter-card.r2 {
-        background-image: url(assets/phone-file-2.png);
-    }
-
-    .renter-card.r3 {
-        background-image: url(assets/phone-file-3.png);
-    }
-
-    /* 逸安和宇廷的顏色互換（手機版） */
-    .renter-card.r1 {
-        background-image: url(assets/phone-file-4.png);
-    }
-
-    .renter-card.r4 {
-        background-image: url(assets/phone-file-1.png);
+        background-image: none;            /* 四張卡片都不用彩色底圖了 */
+        background-color: white;           /* 統一白底 */
+        color: #1E1E24;                    /* 白底上改用深色字 */
+        border-radius: 14px;
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);   /* 一點陰影，讓白色卡片從深色背景浮出來 */
     }
 
     .renter-card.active {
@@ -1581,10 +1573,10 @@ footer a {
        不然卡片背景是用 aspect-ratio 撐出來的資料夾圖，內容被撐得比圖片高的話，
        多出來的部分不會有白底，字會看不清楚 */
     .renter {
-        gap: 40px;           /* 照片和互動亮點之間的距離 */
+        gap: calc(40 * var(--r));           /* 照片和互動亮點之間的距離 */
         align-items: center;
-        margin-top: 20px;
-        margin-left: 20px;   /* 照片和互動亮點整組往右移，視覺上才不會偏左；下方的引言不受影響 */
+        margin-top: calc(20 * var(--r));
+        margin-left: calc(20 * var(--r));   /* 照片和互動亮點整組往右移，視覺上才不會偏左；下方的引言不受影響 */
     }
 
     .name-and-pic {
@@ -1593,16 +1585,17 @@ footer a {
     }
 
     .name-and-pic img {
-        width: 64px;
+        width: calc(64 * var(--r));
         height: auto;
-        /* 沿著圖案邊緣加一圈白色光暈，圖案在同色的卡片上才看得出輪廓；
-           同一個效果疊四次，光暈才會夠實、夠明顯 */
-        filter: drop-shadow(0 0 2.2px white) drop-shadow(0 0 2.2px white)
-                drop-shadow(0 0 2.2px white) drop-shadow(0 0 2.2px white);  /* 模糊範圍：1.5px → 1.8px → 2.2px，每次加大 20% */
     }
 
+    /* 圖片下方的租客名字 */
     .name-and-pic h3 {
-        display: none;
+        display: block;
+        font-size: calc(16 * var(--r));             /* 跟右邊「互動亮點」標題一樣大 */
+        font-weight: 600;
+        margin-top: calc(14 * var(--r));            /* 跟圖片的距離 */
+        text-align: center;
     }
 
     .interact {
@@ -1611,24 +1604,31 @@ footer a {
         gap: 10px;
     }
 
+    /* 「互動亮點」標題 */
+    .interact h3 {
+        font-size: calc(16 * var(--r));
+        margin: calc(10 * var(--r)) 0;
+    }
+
     .interact p {
-        font-size: 0.875rem;
+        font-size: calc(14 * var(--r));       /* 原本 0.875rem = 14px */
         line-height: 1.3;
-        padding: 4px 0;
+        padding: calc(4 * var(--r)) 0;
         word-break: break-word;
         font-weight: 500;
     }
 
     .quote-up {
-        font-size: 0.875rem;
-        margin-top: 30px;
+        font-size: calc(14 * var(--r));
+        margin-top: calc(30 * var(--r));
         line-height: 2;
         font-weight: 500;
     }
 
     .quote-down {
-        font-size: 0.875rem;
-        margin-top: 5px;
+        font-size: calc(14 * var(--r));
+        margin-top: calc(5 * var(--r));
+        margin-right: calc(4 * var(--r));   /* 卡片右邊已經有留白了，這裡只要再留一點 */
         line-height: 2;
         font-weight: 500;
     }
