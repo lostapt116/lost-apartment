@@ -146,6 +146,48 @@ nav {
     border-radius: calc(50 * var(--d));
 }
 
+/* ===== 毛玻璃導覽列（只在 1251px 以上的電腦版生效；想恢復原本的樣子，把這一整段刪掉就好） ===== */
+@media screen and (min-width: 1251px) {
+    /* 整條 header：半透明的深色 + 把後面的頁面內容變模糊 */
+    header {
+        background-color: rgba(30, 30, 36, 0.55);          /* 最後的數字是不透明度，越小越透 */
+        backdrop-filter: blur(14px);                       /* 模糊程度，越大越霧 */
+        -webkit-backdrop-filter: blur(14px);               /* Safari 需要這一行 */
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* 底部一條很淡的亮線，像玻璃的邊緣 */
+    }
+
+    /* 中間的膠囊：淺色的玻璃，加一圈淡淡的亮邊 */
+    .navbar {
+        background-color: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.28);
+    }
+
+    /* 膠囊裡的按鈕：底色拿掉、文字改成白色（原本是白底深色字） */
+    .navbar .nav-button {
+        background-color: transparent;
+        color: white;
+        transition: background-color 0.25s ease, color 0.25s ease;   /* 顏色變化用 0.25 秒漸變，不要瞬間切換 */
+    }
+
+    /* 滑鼠移到按鈕上：浮出一層淡淡的白色霧面，像玻璃被照亮 */
+    .navbar .nav-button:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* 目前所在的段落：反過來用白底深色字，在玻璃上才夠明顯 */
+    .navbar .nav-button.active {
+        background-color: white;
+        color: #1E1E24;
+    }
+
+    /* 目前所在的段落已經是白底了，滑鼠移上去維持不變 */
+    .navbar .nav-button.active:hover {
+        background-color: white;
+    }
+}
+/* ===== 毛玻璃導覽列結束 ===== */
+
+
 /* 頁面內容 */
 main {
     height: auto;
@@ -1253,6 +1295,11 @@ footer a {
         display: block;
     }
 
+    /* 手機版首頁的段落文字，字重統一用 500（下面個別的段落規則也都改成 500 了） */
+    main p {
+        font-weight: 500;
+    }
+
     /* 頁面內容 */
     main {
         padding: 0 24px;
@@ -1329,7 +1376,7 @@ footer a {
     /* 手機版不用滑鼠移入才顯示，直接顯示；改靠左對齊，不置中 */
     .lost-same p {
         font-size: 0.875rem;
-        font-weight: 400;
+        font-weight: 500;
         letter-spacing: 0.5px;
         text-align: left;
         opacity: 1;
@@ -1350,7 +1397,7 @@ footer a {
 
     .our-data p {
         font-size: 0.875rem;
-        font-weight: 300;
+        font-weight: 500;
         line-height: 30px; /* 214.286% */
         text-align: left;
         letter-spacing: 0.8px;
@@ -1362,7 +1409,7 @@ footer a {
         margin-right: 0;
         margin-bottom: 40px;
         font-style: normal;
-        font-weight: 300;
+        font-weight: 500;
         line-height: 30px; /* 187.5% */
         letter-spacing: 0.8px;
     }
@@ -1387,7 +1434,7 @@ footer a {
     .not-lonely p {
         font-size: 1rem;
         opacity: 1;
-        font-weight: 300;
+        font-weight: 500;
         line-height: 30px; /* 187.5% */
         letter-spacing: 0.8px;
     }
@@ -1420,7 +1467,7 @@ footer a {
         font-size: 1rem;
         font-size: 16px;
         font-style: normal;
-        font-weight: 300;
+        font-weight: 500;
         line-height: 30px; /* 187.5% */
         letter-spacing: 0.8px;
         text-align: left;
@@ -1569,18 +1616,21 @@ footer a {
         line-height: 1.3;
         padding: 4px 0;
         word-break: break-word;
+        font-weight: 500;
     }
 
     .quote-up {
         font-size: 0.875rem;
         margin-top: 30px;
         line-height: 2;
+        font-weight: 500;
     }
 
     .quote-down {
         font-size: 0.875rem;
         margin-top: 5px;
         line-height: 2;
+        font-weight: 500;
     }
 
     /* 預約入住表單 */

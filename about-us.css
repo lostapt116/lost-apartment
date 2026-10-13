@@ -139,6 +139,50 @@ nav {
     border-radius: calc(50 * var(--d));
 }
 
+/* ===== 毛玻璃導覽列（只在 1251px 以上的電腦版生效；想恢復原本的樣子，把這一整段刪掉就好） ===== */
+@media screen and (min-width: 1251px) {
+    /* 整條 header：半透明的深色 + 把後面的頁面內容變模糊 */
+    header {
+        background-color: rgba(30, 30, 36, 0.55);          /* 最後的數字是不透明度，越小越透 */
+        backdrop-filter: blur(14px);                       /* 模糊程度，越大越霧 */
+        -webkit-backdrop-filter: blur(14px);               /* Safari 需要這一行 */
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* 底部一條很淡的亮線，像玻璃的邊緣 */
+    }
+
+    /* 中間的膠囊：淺色的玻璃，加一圈淡淡的亮邊 */
+    .navbar {
+        background-color: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.28);
+    }
+
+    /* 膠囊裡的按鈕：底色拿掉、文字改成白色（原本是白底深色字） */
+    .navbar .nav-button {
+        background-color: transparent;
+        color: white;
+        transition: background-color 0.25s ease, color 0.25s ease;   /* 顏色變化用 0.25 秒漸變，不要瞬間切換 */
+    }
+
+    /* 滑鼠移到按鈕上：浮出一層淡淡的白色霧面，像玻璃被照亮 */
+    .navbar .nav-button:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* 目前所在的頁面（關於我們）：反過來用白底深色字，在玻璃上才夠明顯 */
+    .navbar .nav-button.about-us {
+        background-color: white;
+        color: #1E1E24;
+    }
+
+    /* 目前所在的頁面已經是白底了，滑鼠移上去維持不變 */
+    .navbar .nav-button.about-us:hover {
+        background-color: white;
+    }
+}
+/* ===== 毛玻璃導覽列結束 ===== */
+
+
+
+
 /* 頁面內容 */
 main {
     height: auto;
