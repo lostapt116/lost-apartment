@@ -1,0 +1,758 @@
+:root {
+    /* 電腦版的單位：以 1440px 的設計稿為準，螢幕超過 1440px 就不再放大 */
+    --d: calc(min(100vw, 1440px) / 1440);
+}
+
+/* 全域重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    height: auto;
+    background: url(assets/background.PNG) 100% 1000px repeat;
+    font-family: "Chiron GoRound TC";
+}
+
+/* nav */
+header {
+    background-color: #1E1E24;
+    width: 100%;
+    height: calc(130 * var(--d));
+    padding: calc(15 * var(--d)) calc(50 * var(--d));
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    margin-top:auto;
+    margin-bottom:auto;
+}
+
+.logo-spider {
+    height: calc(69 * var(--d));
+    width: auto;                          /* 寬度照圖片比例自動算，不會變形 */
+    margin-right: calc(16 * var(--d));
+    rotate: -10deg;
+}
+
+.logo-standard-word {
+    height: calc(69 * var(--d));
+    width: auto;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    margin-right: calc(30 * var(--d));
+    align-items: center;
+}
+
+.navbar {
+    background-color: white;
+    margin: auto;
+    padding: calc(14 * var(--d)) 1px;
+    border-radius: calc(30 * var(--d));
+    font-size: calc(16 * var(--d));       /* 原本 1rem = 16px */
+    margin-right: calc(40 * var(--d));
+}
+
+.nav-button {
+    text-decoration: none;
+    color: #1E1E24;
+    font-weight: 600;
+}
+
+/* IG 圖示：原本沒有設定大小，用的是圖檔本身的 40px */
+.ig > img {
+    display: block;
+    width: calc(40 * var(--d));
+    height: calc(40 * var(--d));
+}
+
+.mob-wrapper {
+    display: none;
+}
+
+/* 頁面按鈕 */
+.home {
+    background-color: white;
+    color: #1E1E24;
+    padding: calc(11 * var(--d)) calc(30 * var(--d));
+    border-radius: calc(50 * var(--d));
+}
+
+.about-lost {
+    background-color: white;
+    color: #1E1E24;
+    padding: calc(11 * var(--d)) calc(15 * var(--d));
+    border-radius: calc(50 * var(--d));
+}
+
+.reservation {
+    background-color: white;
+    color: #1E1E24;
+    padding: calc(11 * var(--d)) calc(15 * var(--d));
+    border-radius: calc(50 * var(--d));
+}
+
+/* 啟動（目前所在的頁面） */
+.donate {
+    background-color: #1E1E24;
+    color: white;
+    padding: calc(11 * var(--d)) calc(15 * var(--d));
+    border-radius: calc(50 * var(--d));
+}
+
+.about-us {
+    background-color: white;
+    color: #1E1E24;
+    padding: calc(11 * var(--d)) calc(15 * var(--d));
+    border-radius: calc(50 * var(--d));
+}
+
+.faq {
+    background-color: white;
+    color: #1E1E24;
+    padding: calc(11 * var(--d)) calc(15 * var(--d));
+    border-radius: calc(50 * var(--d));
+}
+
+.contact {
+    background-color: white;
+    color: #1E1E24;
+    padding: calc(11 * var(--d)) calc(15 * var(--d));
+    border-radius: calc(50 * var(--d));
+}
+
+.quiz {
+    background-color: white;
+    color: #1E1E24;
+    padding: calc(11 * var(--d)) calc(15 * var(--d));
+    border-radius: calc(50 * var(--d));
+}
+
+/* ===== 毛玻璃導覽列（只在 1251px 以上的電腦版生效；想恢復原本的樣子，把這一整段刪掉就好） ===== */
+@media screen and (min-width: 1251px) {
+    /* 整條 header：半透明的深色 + 把後面的頁面內容變模糊 */
+    header {
+        background-color: rgba(30, 30, 36, 0.55);          /* 最後的數字是不透明度，越小越透 */
+        backdrop-filter: blur(14px);                       /* 模糊程度，越大越霧 */
+        -webkit-backdrop-filter: blur(14px);               /* Safari 需要這一行 */
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* 底部一條很淡的亮線，像玻璃的邊緣 */
+    }
+
+    /* 中間的膠囊：淺色的玻璃，加一圈淡淡的亮邊 */
+    .navbar {
+        background-color: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.28);
+    }
+
+    /* 膠囊裡的按鈕：底色拿掉、文字改成白色（原本是白底深色字） */
+    .navbar .nav-button {
+        background-color: transparent;
+        color: white;
+        transition: background-color 0.25s ease, color 0.25s ease;   /* 顏色變化用 0.25 秒漸變，不要瞬間切換 */
+    }
+
+    /* 滑鼠移到按鈕上：浮出一層淡淡的白色霧面，像玻璃被照亮 */
+    .navbar .nav-button:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* 目前所在的頁面（我要募資）：反過來用白底深色字，在玻璃上才夠明顯 */
+    .navbar .nav-button.donate {
+        background-color: white;
+        color: #1E1E24;
+    }
+
+    /* 目前所在的頁面已經是白底了，滑鼠移上去維持不變 */
+    .navbar .nav-button.donate:hover {
+        background-color: white;
+    }
+}
+/* ===== 毛玻璃導覽列結束 ===== */
+
+
+/* 頁面內容 */
+main {
+    height: auto;
+    margin-top: 200px;
+    margin-bottom: 100px;
+    color: white;
+}
+
+h2 {
+    /* 響應式字級：跟著螢幕寬度縮放，最小 16px、最大 24px（1440px 的螢幕剛好是 24px） */
+    font-size: clamp(16px, 1.7vw, 24px);
+    font-weight: 500;
+    line-height: 1.5;
+    padding: 0 20px;             /* 窄螢幕換行時，左右留一點邊，不會貼到螢幕邊緣 */
+    margin-bottom: clamp(12px, 1.4vw, 20px);
+    text-align: center;
+}
+
+/* 募資頁面的截圖。原本寫的是 img，會套用到頁面上所有的圖片，連 header 的 logo 和 IG 圖示都被影響，所以改成只指定這張截圖 */
+.donate-screenshot {
+    display: block;
+    width: 100%;                 /* 寬度交給左欄決定 */
+    border-radius: 12px;
+}
+
+/* ===== 左右兩欄 ===== */
+.donate-layout {
+    display: flex;
+    align-items: flex-start;     /* 兩欄的最上緣對齊在同一條水平線 */
+    gap: 48px;                   /* 左右兩欄之間的距離 */
+    max-width: 1200px;
+    margin: 40px auto 0;
+    padding: 0 60px;
+}
+
+/* 左欄：截圖，使用右欄以外剩下的寬度 */
+.donate-image {
+    flex: 1 1 0;
+    min-width: 0;
+    transition: transform 0.25s ease;
+}
+
+/* 滑鼠移到截圖上稍微放大，提示可以點 */
+.donate-image:hover {
+    transform: scale(1.02);
+}
+
+/* 右欄：說明文字，固定 500px 寬，最長的那行「……｜傳科系畢業成果展」才放得下一行 */
+.donate-info {
+    flex: 0 0 500px;
+    padding: 28px 32px;
+    border: 1px solid rgba(255, 255, 255, 0.4);    /* 框線清楚一點，看得出右欄的最上緣跟左邊的截圖對齊 */
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.04);
+    color: white;
+    text-align: left;
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
+/* 「回饋品領取與寄送說明」標題 */
+.donate-info h3 {
+    font-size: 1.375rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* 【面交】【郵寄】 */
+.donate-info h4 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+/* 每一大段之間的距離 */
+.donate-block {
+    margin-bottom: 22px;
+}
+
+/* 每一種領取方式，左邊加一條細線，看得出是一組 */
+.donate-option {
+    padding-left: 14px;
+    border-left: 2px solid rgba(255, 255, 255, 0.35);
+    margin-bottom: 14px;
+}
+
+/* 「形式一」「形式二」 */
+.donate-option-title {
+    font-weight: 600;
+    color: #A8A8F8;              /* 蜘蛛 logo 上毛線球的顏色 */
+}
+
+/* 需要填進「地址」欄位的內容，加粗強調 */
+.donate-info strong {
+    font-weight: 700;
+}
+
+/* 最下面的聯絡提醒 */
+.donate-note {
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 0.9375rem;
+    opacity: 0.85;
+}
+
+.donate-note a {
+    color: white;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+/* 跳到回饋品說明的連結：左右兩欄時說明就在旁邊，用不到，先藏起來 */
+.donate-jump {
+    display: none;
+}
+
+/* 點連結時用滑動的方式捲下去，不要瞬間跳過去 */
+html {
+    scroll-behavior: smooth;
+}
+
+/* 捲到說明框時，上方預留 header 的高度，標題才不會被固定在頂端的 header 蓋住 */
+.donate-info {
+    scroll-margin-top: 150px;
+}
+
+/* 螢幕比較窄時（1000px 以下）：改成上下排列，截圖在上、說明在下 */
+@media screen and (max-width: 1000px) {
+    /* 上下排列時，說明被擠到截圖下面，才顯示這個連結 */
+    .donate-jump {
+        display: block;
+        width: fit-content;
+        margin: 0 auto 4px;
+        padding: 0 20px;
+        font-size: 0.9375rem;
+        font-weight: 500;
+        color: #A8A8F8;               /* 跟「形式一」「形式二」同一個毛線球的顏色 */
+        text-decoration: underline;
+        text-underline-offset: 4px;
+    }
+
+    .donate-layout {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 28px;
+        max-width: 640px;
+        padding: 0 24px;
+    }
+
+    .donate-image,
+    .donate-info {
+        flex: none;              /* 上下排列時，兩塊都撐滿整個寬度 */
+    }
+}
+
+/* 手機版：字和留白都縮小一點 */
+@media screen and (max-width: 768px) {
+    .donate-layout {
+        padding: 0;
+        margin-top: 24px;
+    }
+
+    .donate-info {
+        padding: 20px 18px;
+        font-size: 0.875rem;
+    }
+
+    .donate-info h3 {
+        font-size: 1.125rem;
+    }
+
+    .donate-info h4 {
+        font-size: 1rem;
+    }
+
+    .donate-note {
+        font-size: 0.8125rem;
+    }
+}
+/* ===== 左右兩欄結束 ===== */
+
+/* footer */
+footer {
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 10px;
+    margin: 20px;
+}
+
+footer > p {
+    align-items: center;
+}
+
+footer a {
+    text-decoration: none;
+    color: white;
+}
+
+.social-media-footer {
+    align-items: center;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.mail {
+    align-items: center;
+    margin: auto;
+}
+
+.ig-footer > img {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.mail-footer, .social-media-footer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.contact-info {
+    display: none;
+}
+
+/* 螢幕 1250px 以下：選單列收起來，改用漢堡選單（手機版也會套用到這段） */
+@media screen and (max-width: 1250px) {
+    .navbar {
+        display: none;
+    }
+
+    header {
+        background-image: none;
+        background-color:#1E1E24;
+    }
+
+    .mob-wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .mob-nav {
+        display: flex;
+        position: absolute;
+        flex-direction: column;
+        top: 100%;
+        right: 0;
+        left: 0;
+        padding: 10px 15px;
+        height: auto;
+        align-items: stretch;
+        background-color: #1E1E24;
+        border-radius: 0 0 15px 15px;
+        box-shadow: 0 4px 5px 2px rgba(255, 255, 255, 0.10);
+        margin-right: 0;  
+
+        opacity: 0;
+        transform: translateY(-10px);
+        visibility: hidden;
+        transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+    }
+
+    .mob-nav-button {
+        padding: 10px 15px;
+    }
+
+    .mob-nav-button > a {
+        text-decoration: none;
+        font-weight: 300;
+        color: white;
+    }
+
+    .mob-wrapper.open .mob-nav {
+        opacity: 1;
+        transform: translateY(0);
+        visibility: visible;
+    }
+
+    .hamburger-btn {
+        display: flex;
+        background: none;
+        border: 0;
+        padding: 0;
+        cursor: pointer;
+    }
+
+    .icon-close {
+        display: none;
+    }
+
+    .mob-wrapper.open .icon-open {
+        display: none;
+    }
+
+    .mob-wrapper.open .icon-close {
+        display: block;
+    }
+
+    /* 新增：IG 和漢堡圖示在這個範圍用固定大小，才夠大、好點 */
+    .ig > img,
+    .hamburger-btn img {
+        width: 30px;
+        height: 30px;
+    }
+
+    /* 新增：IG 和漢堡圖示之間的距離 */
+    .ig {
+        margin-right: 24px;
+    }
+}
+
+/* 螢幕 769px ~ 1250px：footer 改成上下兩行（第一行製作團隊，第二行信箱和社群），手機版不受影響 */
+@media screen and (min-width: 769px) and (max-width: 1250px) {
+    footer {
+        flex-direction: column;   /* 由左右並排改成上下排列 */
+        text-align: center;
+        gap: 8px;                 /* 兩行之間的距離 */
+    }
+
+    footer > p {
+        font-size: 0.875rem;
+    }
+
+    /* 電腦版的信箱、社群先藏起來，改用下面包在同一行的那一組 */
+    .mail-footer, .social-media-footer {
+        display: none;
+    }
+
+    .contact-info {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 24px;                /* 信箱和社群之間的距離 */
+    }
+
+    .contact-info > p {
+        font-size: 0.875rem;
+    }
+
+    .mob-mail-footer, .mob-social-media-footer {
+        display: flex;
+        align-items: center;
+        gap: 8px;                 /* 文字和圖示之間的距離 */
+    }
+
+    .contact-info .mail {
+        font-size: 1.25rem;       /* 信封圖示的大小 */
+        margin: 0;
+    }
+
+    .ig-footer > img {
+        display: block;
+        width: 1.25rem;
+        height: 1.25rem;
+    }
+}
+
+/* 手機版：768px 以下 */
+@media screen and (max-width: 768px) {
+    :root {
+        /* 螢幕超過 560px 之後就不再放大，以 560px 的大小為準 */
+        --u: calc(min(100vw, 560px) / 430);
+        --d: 1px;   /* 手機版把電腦版的單位固定成 1px，電腦版的數字就會維持原本的大小 */
+    }
+
+    /* nav */
+    header {
+        height: 136px;
+        background-image: none;
+        background-color:#1E1E24;
+        padding-top: 65px;
+        padding-right: 24px;
+        padding-left: 24px;
+        align-items: center;
+        z-index: 100;
+    }
+
+    .logo-spider {
+        width: 41px;
+        height: 39px;
+        margin-right: 5px;
+        margin-bottom: 3px;
+    }
+
+    .logo-standard-word {
+        width: 107px;
+        height: 45px;
+        aspect-ratio: 107/45;
+    }
+
+    nav {
+        margin-right: 0px;
+    }
+
+    .ig > img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .ig {
+        margin-right: 24px;
+    }
+
+    .navbar {
+        display: none;
+    }
+
+    .mob-wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .mob-nav {
+        display: flex;
+        position: absolute;
+        background-color: #363f59d1;
+        flex-direction: column;
+        top: 100%;
+        right: 0;
+        left: 0;
+        padding: 10px 15px;
+        height: auto;
+        align-items: stretch;
+        background-color: #1E1E24;
+        border-radius: 0 0 15px 15px;
+        box-shadow: 0 4px 5px 2px rgba(255, 255, 255, 0.10);
+
+        opacity: 0;
+        transform: translateY(-10px);
+        visibility: hidden;
+        transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+    }
+
+    .mob-nav-button {
+        padding: 10px 15px;
+    }
+
+    .mob-nav-button > a {
+        text-decoration: none;
+        font-weight: 300;
+        color: white;
+    }
+
+    .mob-wrapper.open .mob-nav {
+        opacity: 1;
+        transform: translateY(0);
+        visibility: visible;
+    }
+
+    .hamburger-btn {
+        display: flex;
+        background: none;
+        border: 0;
+        padding: 0;
+        cursor: pointer;
+    }
+
+    .icon-close {
+        display: none;
+    }
+
+    .mob-wrapper.open .icon-open {
+        display: none;
+    }
+
+    .mob-wrapper.open .icon-close {
+        display: block;
+    }
+
+    /* 頁面內容 */
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    main {
+        padding: 0 20px;
+        flex: 1;
+    }
+
+    .contact-form {
+        width: 80%;
+    }
+
+    label {
+        display: flex;
+        font-size: 0.875rem;
+        padding-left: 10px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+        margin-bottom: 0;
+    }
+
+    .fill-email {
+        margin-bottom: 0;
+    }
+
+    .fill-name, .fill-phone, .fill-email, .fill-message {
+        font-size: 1rem;
+    }
+
+    .form-buttons {
+        gap: 50px;
+    }
+
+    .btn {
+        font-size: 1rem;
+    }
+
+    .contact-form::after, .contact-form::before {
+        display: none;
+    }
+
+    /* footer */
+    footer {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        line-height: 2;
+    }
+
+    footer > p {
+        font-size: 0.625rem;
+    }
+
+    footer a {
+        text-decoration: none;
+        font-size: 0.625rem;
+    }
+
+    .mail-footer, .social-media-footer {
+        display: none;
+    }
+
+    .contact-info {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .contact-info > a {
+        color: white;
+        font-size: 0.625rem;
+        align-items: center;
+        gap: 5px;
+        justify-content: space-between;
+    }
+
+    .mob-mail-footer, .mob-social-media-footer {
+        display: flex;
+        align-items: center;
+    }
+
+    .mob-mail-footer {
+        margin-right: 20px;
+    }
+
+    .mail {
+        font-size: 0.625rem;
+    }
+
+    .ig-footer > img {
+        width: 0.625rem;
+        height: 0.625rem;
+    }
+}
