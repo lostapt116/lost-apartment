@@ -273,6 +273,12 @@ h2 {
     color: #A8A8F8;              /* 蜘蛛 logo 上毛線球的顏色 */
 }
 
+/* 贊助方案的名稱，跟「形式一」「形式二」用同一個毛線球的顏色 */
+.donate-plan {
+    font-weight: 600;
+    color: #A8A8F8;
+}
+
 /* 需要填進「地址」欄位的內容，加粗強調 */
 .donate-info strong {
     font-weight: 700;
