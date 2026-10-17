@@ -1022,21 +1022,64 @@ html {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 200px;
+    gap: calc(200 * var(--d));          /* 兩家廠商之間的距離，跟著螢幕寬度縮放（1440px 時是 200px） */
     margin-top: 20px;
+}
+
+/* 每一家廠商：logo 在上、名稱在下，置中對齊 */
+.sponsor-group > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .sponsor-group img {
     width: auto;
-    height: 100px;
+    height: calc(100 * var(--d));       /* logo 高度，1440px 時是 100px */
+    max-width: 100%;
 }
 
 .sponsor-group h3 {
     text-align: center;
-    margin-top: 40px;
-    margin-bottom: 40px;
-    font-size: 1.5rem;
+    margin-top: calc(40 * var(--d));
+    margin-bottom: calc(40 * var(--d));
+    font-size: calc(24 * var(--d));     /* 原本 1.5rem = 24px */
     font-weight: 500;
+}
+
+/* 手機版：兩家廠商維持左右並排，各佔一半寬度，logo 縮小，不會超出螢幕 */
+@media screen and (max-width: 768px) {
+    .sponsor {
+        margin-bottom: 80px;
+    }
+
+    .sponsor h1 {
+        font-size: 1.5rem;              /* 跟手機版其他區塊的標題一樣大 */
+        margin-bottom: 30px;
+    }
+
+    .sponsor-group {
+        gap: 24px;
+        margin-top: 0;
+    }
+
+    .sponsor-group > div {
+        flex: 1 1 0;                    /* 兩家平分寬度 */
+        min-width: 0;
+    }
+
+    .sponsor-group img {
+        height: 70px;                   /* 兩個 logo 高度一致，寬度照各自比例 */
+        width: auto;
+        max-width: 100%;
+        object-fit: contain;            /* 太寬時整張縮進框裡，不會變形 */
+    }
+
+    .sponsor-group h3 {
+        font-size: 1rem;
+        margin-top: 16px;
+        margin-bottom: 0;
+    }
 }
 
 /* footer */
