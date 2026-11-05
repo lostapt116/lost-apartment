@@ -1017,13 +1017,14 @@ html {
     text-align: center;
 }
 
+/* 三家廠商排成三欄，每一欄一樣寬，logo 都在自己那一欄的正中間，整排就會均勻分布、置中 */
 .sponsor-group {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: calc(200 * var(--d));          /* 兩家廠商之間的距離，跟著螢幕寬度縮放（1440px 時是 200px） */
-    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);      /* 三欄等寬 */
+    align-items: start;                          /* 三欄從頂端對齊，名稱才會在同一條水平線 */
+    gap: calc(40 * var(--d));
+    max-width: calc(960 * var(--d));             /* 整排最寬 960px（1440px 螢幕時），在頁面上置中 */
+    margin: 20px auto 0;
 }
 
 /* 每一家廠商：logo 在上、名稱在下，置中對齊 */
@@ -1033,10 +1034,12 @@ html {
     align-items: center;
 }
 
+/* 每個 logo 都放進同樣大小的框裡（最寬 240px、高 100px），比例不同的 logo 看起來份量才會一致 */
 .sponsor-group img {
-    width: auto;
-    height: calc(100 * var(--d));       /* logo 高度，1440px 時是 100px */
-    max-width: 100%;
+    width: 100%;
+    max-width: calc(240 * var(--d));
+    height: calc(100 * var(--d));
+    object-fit: contain;                         /* 整張縮進框裡，不變形、不裁切 */
 }
 
 .sponsor-group h3 {
@@ -1047,7 +1050,7 @@ html {
     font-weight: 500;
 }
 
-/* 手機版：兩家廠商維持左右並排，各佔一半寬度，logo 縮小，不會超出螢幕 */
+/* 手機版：三家維持一排三欄，logo 和字縮小 */
 @media screen and (max-width: 768px) {
     .sponsor {
         margin-bottom: 80px;
@@ -1059,26 +1062,34 @@ html {
     }
 
     .sponsor-group {
-        gap: 24px;
+        gap: 12px;
+        max-width: none;
         margin-top: 0;
     }
 
-    .sponsor-group > div {
-        flex: 1 1 0;                    /* 兩家平分寬度 */
-        min-width: 0;
-    }
-
     .sponsor-group img {
-        height: 70px;                   /* 兩個 logo 高度一致，寬度照各自比例 */
-        width: auto;
         max-width: 100%;
-        object-fit: contain;            /* 太寬時整張縮進框裡，不會變形 */
+        height: 56px;
     }
 
     .sponsor-group h3 {
-        font-size: 1rem;
-        margin-top: 16px;
+        font-size: 0.875rem;
+        line-height: 1.4;
+        margin-top: 12px;
         margin-bottom: 0;
+    }
+}
+
+/* 螢幕窄到「Monster Energy」在三欄裡會斷成兩行時（約 380px 以下），改成一家廠商自己一行 */
+@media screen and (max-width: 384px) {
+    .sponsor-group {
+        grid-template-columns: 1fr;      /* 只有一欄，三家由上往下排 */
+        gap: 32px;                       /* 上下兩家之間的距離 */
+    }
+
+    .sponsor-group img {
+        height: 64px;                    /* 一行只有一家，logo 可以稍微大一點 */
+        max-width: 200px;
     }
 }
 
