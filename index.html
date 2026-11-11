@@ -253,16 +253,16 @@
         <div class="reservation-section" id="reservation-section">
             <div class="reservation-card locked" id="reservation">
 
-                <!-- ▼▼▼【開放報名時 1/2】把這一整段遮罩刪掉或註解掉（從這裡開始）▼▼▼ -->
+                <!-- 報名已開放：鎖住表單的遮罩先註解起來。
+                     之後要再鎖住表單：把下面這段的註解符號拿掉，並在 <form> 最後加回 inert
                 <div class="form-lock">
                     <img src="assets/lock.svg" alt="">
                     <p>若失公寓已結束報名</p>
                     <p>請等待入住通知～</p>
                 </div>
-                <!-- ▲▲▲【開放報名時 1/2】刪到這裡為止 ▲▲▲ -->
+                -->
 
-                <!-- ▼▼▼【開放報名時 2/2】把下一行最後面的 inert 刪掉（inert 會讓整個表單不能點、不能輸入）▼▼▼ -->
-                <form class="reservation-form" id="reservation-form" inert>
+                <form class="reservation-form" id="reservation-form">
                     <h1>預約入住資訊填寫</h1>
         
                     <div class="form-field">
@@ -327,6 +327,14 @@
                     <div class="form-field time-slot-field">
                         <label><span class="required">*</span> 可預約時段：</label>
                         <div class="time-slot-list">
+                            <!-- 目前只開放這一個場次。required：沒有勾選就送不出表單，瀏覽器會提示 -->
+                            <label class="checkbox-option time-slot-single">
+                                <input type="checkbox" name="time-1114" value="19:30~20:30" required>
+                                11/14（六）19:30 - 20:30
+                            </label>
+                        </div>
+                        <!-- 原本兩天、多個時段的下拉選單，先註解起來留著，之後要恢復可以直接拿掉註解
+                        <div class="time-slot-list">
                             <div class="time-slot-row">
                                 <span class="time-slot-date">11/14（六）</span>
                                 <div class="multi-select">
@@ -385,6 +393,7 @@
                             </div>
                             <p class="form-note">註：建議勾選所有方便的時段，以利幫您安排體驗時間。</p>
                         </div>
+                        -->
                     </div>
         
                     <div class="form-field">
